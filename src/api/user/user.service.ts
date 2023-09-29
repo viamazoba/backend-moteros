@@ -1,5 +1,5 @@
 import User from "./user.model";
-import { userInput } from "./user.types";
+import { userInput, EditUserInput } from "./user.types";
 import { hashPassword } from "../../auth/utils/bcrypt";
 
 export const createUser = async (userInfo : userInput) =>{
@@ -35,17 +35,22 @@ export async function getUserByEmail(userEmail: string) {
         return null
       }
 
-    //   const data: userInput = {
-    //     name: user.name,
-    //     lastName: user.lastName,
-    //     email: user.email,
-    //     password: user.password,
-    //     avatar: user.avatar
-    // }
       return user;
 
     }catch(error){
       console.error('Error consulting user:', error)
       return null
     }
-  }
+}
+
+export async function editUser(id: string, newUserInfo: EditUserInput) {
+  
+    try{
+      const user = await User.updateOne(
+        {_id: id}, newUserInfo );
+      return user;
+  
+    }catch(error){
+      return error
+    }
+}

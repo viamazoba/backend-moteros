@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { userInput} from "./user.types";
+import { userInput, EditUserInput} from "./user.types";
 import { PayloadType } from "../../auth/auth.types";
-import { createUser, getUserByEmail} from "./user.service";
-import { signToken } from "../../auth/auth.service";
+import { createUser, getUserByEmail, editUser} from "./user.service";
+import { signToken, verifyToken } from "../../auth/auth.service";
 import { comparePassword } from "../../auth/utils/bcrypt";
 
 export const createUserHandler =async (req:Request, res: Response) => {
@@ -94,3 +94,22 @@ export async function loginUserHandler(req: Request, res: Response) {
       res.status(500).json({ message: 'Internal server error' }); 
     }
   }
+
+export async function editUserHandler(req: Request, res: Response) {
+    try {
+  
+      const data: EditUserInput = req.body;
+  
+      const userToken = req.headers['authorization']?.split(' ')[1] as string
+      const {id} = verifyToken(userToken)
+  
+      await editUser(id, data);
+  
+  
+      
+      res.status(201).json({ message: 'user has been update successfully' });
+    } catch ({ message }: any) {
+  
+      res.status(400).json({ message })
+    }
+}
