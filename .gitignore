@@ -1,0 +1,62 @@
+# Dependencias de Node.js
+node_modules/
+
+# Archivos de registro
+npm-debug.log
+yarn-error.log
+
+# Archivo de configuración de npm
+.npmrc
+
+# Carpetas y archivos generados
+dist/
+build/
+coverage/
+*.log
+*.swp
+
+# Variables de entorno locales
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Archivo de caché de eslint
+.eslintcache
+
+# Carpeta de dependencias de TypeScript
+node_modules/
+typings/
+
+# Dependencias de desarrollo
+*.tsbuildinfo
+
+# Dependencias de producción (si usas Yarn)
+.yarn/
+
+# Dependencias de desarrollo (si usas Yarn)
+.yarnrc
+.yarn-integrity
+
+# Dependencias de pnpm
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# Dependencias de bundle (si usas webpack, parcel, o similar)
+/dist/
+/coverage/
+/lib/
+/node_modules/
+/temp/
+/packages/*/dist/
+/packages/*/temp/
+/packages/*/coverage/
+
+# Dependencias generadas por Babel
+/dist/
+/lib/
+
+# Dependencias de IDE y editores
+.idea/
+.vscode/
