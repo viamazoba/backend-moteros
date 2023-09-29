@@ -6,3 +6,5 @@ export type userInput = {
     password: string;
     avatar?: string;
 }
+
+export type EditUserInput = Partial<userInput>;
