@@ -1,4 +1,5 @@
 import { Schema , model } from "mongoose";
+import { format } from "date-fns"; 
 
 const userSchema = new Schema(
     {
@@ -10,10 +11,20 @@ const userSchema = new Schema(
             require: true
         },
         password: String,
+        birthday: {
+            type: Date,
+            required: false,
+            get: (date: Date) => {
+                return format(date, "dd/MM/yy");
+              },
+              set: (value: string) => {
+                return format(new Date(value), "yyyy-MM-dd");
+              },
+        },
         avatar: {
             type: String,
             require: false,
-            default: 'default-avatar.jpg'
+            default: '/user_icon.png'
         },
         role: {
             type: String,
