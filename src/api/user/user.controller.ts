@@ -38,9 +38,15 @@ export const createUserHandler =async (req:Request, res: Response) => {
             },
         };
 
-        // Encabezado para enviar el token
-        res.header("Authorization", `Bearer ${token}`);
-        res.status(201).json(responseBody)
+
+        const responseWithHeaders = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: responseBody,
+        };
+        
+        res.status(201).json(responseWithHeaders);
 
     }catch(error:any){
         res.status(400).json({message: 'User could not created', data: error.message})
@@ -97,7 +103,6 @@ export async function loginUserHandler(req: Request, res: Response) {
 
 export async function editUserHandler(req: Request, res: Response) {
     try {
-  
       const data: EditUserInput = req.body;
   
       const userToken = req.headers['authorization']?.split(' ')[1] as string
