@@ -88,12 +88,21 @@ export async function loginUserHandler(req: Request, res: Response) {
             name: userData.name,
             lastName: userData.lastName,
             email: userData.email,
-            avatar: userData.avatar
+            avatar: userData.avatar,
+            birthday: userData?.birthday || '',
+            city: userData?.city || '',
+            gender: userData?.gender || ''
         },
         };
-  
-        res.header("Authorization", `Bearer ${token}`);
-        res.status(201).json(responseBody)
+
+        const responseWithHeaders = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: responseBody,
+        };
+        
+        res.status(201).json(responseWithHeaders);
   
     } catch (error) {
       console.error('Error finding user:', error);

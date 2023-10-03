@@ -10,15 +10,16 @@ const userSchema = new Schema(
             unique: true,
             require: true
         },
+        gender: {
+            type: String,
+            require: false
+        },
         password: String,
         birthday: {
             type: Date,
             required: false,
             get: (date: Date) => {
-                return format(date, "dd/MM/yy");
-              },
-              set: (value: string) => {
-                return format(new Date(value), "yyyy-MM-dd");
+                return format(date, "yyyy-MM-dd");
               },
         },
         avatar: {
@@ -29,6 +30,10 @@ const userSchema = new Schema(
         role: {
             type: String,
             default: 'user',
+            require: false
+        },
+        city:{
+            type: String,
             require: false
         }
     },
